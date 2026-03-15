@@ -37,3 +37,16 @@ export const createLoan = (applicant: string, amount: number): LoanApplication =
     loans.push(newLoan);
     return newLoan;
 };
+
+/**
+ * Updates the status of a loan application.
+ * @param {number} id - The ID of the loan to update.
+ * @param {string} status - The new status of the loan.
+ * @throws {Error} Throws an error if the loan is not found.
+ * @returns {LoanApplication} The updated loan.
+ */
+export const updateLoan = (id: number, status: string): LoanApplication => {
+    const loan = getLoanById(id); 
+    loan.status = status;
+    return loan;
+};
