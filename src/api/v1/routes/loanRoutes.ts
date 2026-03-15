@@ -10,5 +10,37 @@ router.get(
     "/", 
     authenticate, 
     isAuthorized({ hasRole: ["officer", "manager", "admin"] }),
-    loan
+    loanController.getAllLoans
+);
+
+// Get loan by ID.
+router.get(
+    "/:id",
+    authenticate,
+    isAuthorized({ hasRole: ["officer", "manager", "admin"] }),
+    loanController.getLoanById
+);
+
+// POST create loan.
+router.post(
+    "/", 
+    authenticate, 
+    isAuthorized({ hasRole: ["manager", "admin"] }),
+    loanController.createLoan
+);
+
+// PUT update loan.
+router.put(
+    "/:id", 
+    authenticate, 
+    isAuthorized({ hasRole: ["manager", "admin"] }),
+    loanController.updateLoan  
+);
+
+// DELETE loan (admin only).
+router.delete(
+    "/:id", 
+    authenticate, 
+    isAuthorized({ hasRole: ["officer", "manager", "admin"] }),
+    loanController.deleteLoan
 );
