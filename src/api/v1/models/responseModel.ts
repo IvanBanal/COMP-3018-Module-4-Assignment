@@ -14,3 +14,18 @@ export const errorResponse = (message: string, code: string) => ({
     },
     timestamp: new Date().toISOString(),
 });
+
+/**
+ * Creates a standardized success response object.
+ * This Ensures all API successes follow the same format for consistent client handling.
+ *
+ * @param {object} data - The response payload.
+ * @param {string} message - Optional success message.
+ * @returns {object} A formatted success response object.
+ */
+export const successResponse = (data: object, message?: string) => ({
+    success: true,
+    message: message || "Operation successful",
+    data,
+    timestamp: new Date().toISOString(),
+});
