@@ -5,3 +5,10 @@ export interface LoanApplication {
     status: string;
     createdAt: string;
 }
+
+export interface AuthUser {
+    uid: string;
+    email: string;
+    role?: string;
+}
+
