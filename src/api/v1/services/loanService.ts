@@ -50,3 +50,15 @@ export const updateLoan = (id: number, status: string): LoanApplication => {
     loan.status = status;
     return loan;
 };
+
+/**
+ * Deletes a loan application by its ID.
+ * @param {number} id - The ID of the loan to delete.
+ * @throws {Error} Throws an error if the loan is not found. 
+ */
+export const deleteLoan = (id: number): void => {
+    const index = loans.findIndex((loan) => loan.id === id);
+
+    if (index === -1) throws new Error("Loan application not found");
+    loans.splice(index, 1);
+};
