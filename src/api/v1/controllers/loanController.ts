@@ -72,6 +72,19 @@ export const updateLoan = (req: Request, res: Response) => {
     });
 };
 
+/**
+ * Deletes a loan application by ID.
+ */
+export const deleteLoan = (req: Request, res: Response) => {
+    const id = Number(req.params.id);
+    loanService.deleteLoan(id);
+
+    res.status(HTTP_STATUS.OK).json({
+        success: true, 
+        message: "Loan application deleted"
+    });
+};
+
 
 
 
