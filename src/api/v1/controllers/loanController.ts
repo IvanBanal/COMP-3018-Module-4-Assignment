@@ -1,6 +1,7 @@
 import {Request, Response} from "express";
 import * as loanService from "../services/loanService";
 import { HTTP_STATUS } from "../../../constants/httpConstants";
+import { app } from "firebase-admin";
 
 /**
  * Get all loan applications.
@@ -35,7 +36,19 @@ export const getLoanById = (req: Request, res: Response) => {
     });
 };
 
+/**
+ * Creates a new loan application.
+ */
+export const createLoan = (req: Request, res: Response) => {
+    const { applicant, amount } = req.body;
+    const data = loanService.createLoan(applicant, amount);
 
+    res.status(HTTP_STATUS.CREATED).json({
+        success: true,
+        message: "Loan application created",
+        data
+    });
+};
 
 
 
