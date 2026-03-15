@@ -50,6 +50,28 @@ export const createLoan = (req: Request, res: Response) => {
     });
 };
 
+/**
+ * Updates the status of a loan application.
+ */
+export const updateLoan = (req: Request, res: Response) => {
+    const id = Number(req.params.id);
+    const { status } = req.body;
+    const data = loanService.updateLoan(id, status);
+
+    if (!data) {
+        res.status(HTTP_STATUS.NOT_FOUND).json({
+            success: false,
+            message: "Loan application not found"
+        });
+        return;
+    }
+    res.status(HTTP_STATUS.OK).json({
+        success: true,
+        message: "Loan application updated",
+        data
+    });
+};
+
 
 
 
