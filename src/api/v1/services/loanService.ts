@@ -59,6 +59,6 @@ export const updateLoan = (id: number, status: string): LoanApplication => {
 export const deleteLoan = (id: number): void => {
     const index = loans.findIndex((loan) => loan.id === id);
 
-    if (index === -1) throws new Error("Loan application not found");
+    if (index === -1) throw new Error("Loan application not found");
     loans.splice(index, 1);
 };
