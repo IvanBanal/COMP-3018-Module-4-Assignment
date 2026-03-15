@@ -19,3 +19,21 @@ export const getLoanById = (id: number): LoanApplication => {
     if (!loan) throw new Error("Loan application not found");
     return loan;
 };
+
+/**
+ * Creates a new loan application.
+ * @param {string} applicant - Name of the applicant.
+ * @param {number} amount - Loan amount requested.
+ * @returns {LoanApplication} The newly created loan.
+ */
+export const createLoan = (applicant: string, amount: number): LoanApplication => {
+    const newLoan: LoanApplication = {
+        id: loans.length + 1,
+        applicant, 
+        amount,
+        status: "pending",
+        createdAt: new Date().toISOString()
+    };
+    loans.push(newLoan);
+    return newLoan;
+};
