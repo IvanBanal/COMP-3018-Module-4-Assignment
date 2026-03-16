@@ -1,3 +1,5 @@
+import { ServiceError } from "../errors/errors";
+import { HTTP_STATUS } from "../../../constants/httpConstants";
 import { LoanApplication } from "../models/interfaces";
 import { loans } from "../data/loanData";
 
@@ -16,7 +18,13 @@ export const getAllLoans = (): LoanApplication[] => loans;
 export const getLoanById = (id: number): LoanApplication => {
     const loan = loans.find((loan) => loan.id === id);
 
-    if (!loan) throw new Error("Loan application not found");
+    if (!loan) {
+        throw new ServiceError(
+            "Loan application not found",
+            "LOAN_NOT_FOUND",
+            HTTP_STATUS.NOT_FOUND
+        );
+    }
     return loan;
 };
 
@@ -59,6 +67,12 @@ export const updateLoan = (id: number, status: string): LoanApplication => {
 export const deleteLoan = (id: number): void => {
     const index = loans.findIndex((loan) => loan.id === id);
 
-    if (index === -1) throw new Error("Loan application not found");
+    if (index === -1) {
+        throw new ServiceError(
+            "Loan application not found",
+            "LOAN_NOT_FOUND",
+            HTTP_STATUS.NOT_FOUND
+        );
+    }
     loans.splice(index, 1);
 };
